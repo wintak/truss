@@ -1,0 +1,3 @@
+com\truss\csv\handlers\CsvFileHandler.class
+com\truss\csv\Normalizer.class
+com\truss\csv\normalizers\DataNormalizer.class
