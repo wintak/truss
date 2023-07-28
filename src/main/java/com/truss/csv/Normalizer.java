@@ -20,6 +20,7 @@ public class Normalizer {
                 log.error("Failed to read CSV data or File is empty");
                 return;
             }
+
             allRows = dataNormalizer.normalizeData(allRows);
             csvFileHandler.writeCsv(allRows);
 
