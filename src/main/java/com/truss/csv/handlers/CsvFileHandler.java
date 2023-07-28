@@ -47,4 +47,5 @@ public class CsvFileHandler {
             log.error("Failed to write CSV data to STDOUT", e);
         }
     }
+
 }

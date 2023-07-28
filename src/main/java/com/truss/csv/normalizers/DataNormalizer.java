@@ -3,6 +3,8 @@ package com.truss.csv.normalizers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.nio.DoubleBuffer;
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -10,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class DataNormalizer {
 
@@ -29,7 +32,7 @@ public class DataNormalizer {
         } catch (Exception e) {
             log.warn("Failed to normalize row. Replacing with Unicode Replacement Character.", e);
             e.printStackTrace();
-            Arrays.fill(row, "\uFFFD");
+            Arrays.fill(row, "\uFFFD"); //remove this
         }
     }
 
@@ -49,9 +52,13 @@ public class DataNormalizer {
     }
 
     private void normalizeDurations(String[] row) {
-        row[4] = String.valueOf(parseDuration(row[4]));
-        row[5] = String.valueOf(parseDuration(row[5]));
-        row[6] = String.valueOf(Double.parseDouble(row[4]) + Double.parseDouble(row[5]));
+        Double a = parseDuration(row[4]);
+        Double b = parseDuration(row[5]);
+        Double c = a + b;
+
+        row[4] = String.valueOf(a);
+        row[5] = String.valueOf(b);
+        row[6] = NumberFormat.getInstance().format(c);
     }
 
     private double parseDuration(String duration) {
